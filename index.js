@@ -14,10 +14,10 @@ const cache = new NodeCache({ stdTTl: 600 });
 const connectDB = async () => {
   try {
     const mongoURI = process.env.MONGO_URL;
-    await mongoose
-      .connect(process.env.MONGO_URI)
-      .then(() => console.log("MongoDB connected"))
-      .catch((err) => console.error("MongoDB connection error", err));
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   } catch (error) {
     console.error("MongoDB connection error");
     process.exit(1);
